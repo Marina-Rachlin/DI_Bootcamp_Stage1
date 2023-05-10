@@ -18,7 +18,7 @@ print(s[0], s[9])
 for i in range(len(s)):
     print(s[:i+1])
 
-#Bonus: Swap some characters around then print the newly jumbled string (hint: look into the shuffle method).
+#Bonus: Swap some characters around then print the newly jumbled string (hint: look into the shuffle method). 
 
 l = list(s)
 random.shuffle(l)
