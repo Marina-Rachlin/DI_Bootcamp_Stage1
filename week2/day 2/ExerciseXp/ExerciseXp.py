@@ -53,7 +53,7 @@ print(basket)
 # And I really liked the way I did it below.
 
 #Create a list containing the following sequence 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 (don’t hard-code the sequence).
-# method range() doesn't work for floats. but we can "fool" him, bring our floats to integers (in our case multiple by 10), ask "range" to give us a sequence and then, when we will get the result bring the integers back to their original form (divide by 10)
+# method range() doesn't work for floats. but we can "fool" him, bring our floats to integers (in our case multiple by 10), ask "range" to give us a sequence and then, when we will get the result bring the integers back to their original form (divide by 10.0)
 l = [x/10.0 for x in range(15, 55, 5)]
 print (l)
 
