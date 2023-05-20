@@ -43,11 +43,11 @@ class Text():
         return cls(text)
 
 
-# text = Text("A good book would sometimes cost as much as a good house.")
-# print(text.get_word_frequency('good'))
-# text = Text("A good book would sometimes cost as much as a good house.")
-# print(text.get_most_common_word())
-# print(text.get_unique_words())
+text = Text("A good book would sometimes cost as much as a good house.")
+print(text.get_word_frequency('good'))
+text = Text("A good book would sometimes cost as much as a good house.")
+print(text.get_most_common_word())
+print(text.get_unique_words())
 
 
 # Part II
