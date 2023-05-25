@@ -6,7 +6,7 @@ from menu_manager import MenuManager
 # If the item was added successfully print a message which states: item was added successfully.
 
 def add_item_to_menu():
-    name = input("Enter the item's name: ").capitalize()
+    name = input("Enter the item's name: ").title()
     price = input("Enter the item's price: ")
 
     # Validate if the price is an integer
@@ -27,7 +27,7 @@ def add_item_to_menu():
 # remove_item_from_menu()- this function should ask the user to input the name of the item they want to remove from the restaurant’s menu. This function will not interact with the menu itself, but simply create a MenuItem object and call the appropriate function from the MenuItem object.
 # If the item was deleted successfully – print a message to let the user know this was completed.
 def remove_item_from_menu():
-    name = input("Enter the item's name to be removed: ").capitalize()
+    name = input("Enter the item's name to be removed: ").title()
 
     item = MenuItem(name, None)
     try:
@@ -42,9 +42,9 @@ def remove_item_from_menu():
 # update_item_from_menu()- this function should ask the user to input the name and price of the item they want to update from the restaurant’s menu, as well as to input the name and price they want to change them with. This function will not interact with the menu itself, but simply create a MenuItem object and call the appropriate function from the MenuItem object.
 # If the item was updated successfully – print a message to let the user know this was completed.
 def update_item_from_menu():
-    current_name = input("Enter the name of the item you want to update: ").capitalize()
+    current_name = input("Enter the name of the item you want to update: ").title()
     current_price = input("Enter the price of the item you want to update: ")
-    new_name = input("Enter the new name for the item: ")
+    new_name = input("Enter the new name for the item: ").title()
     new_price = input("Enter the new price for the item: ")
 
     try:

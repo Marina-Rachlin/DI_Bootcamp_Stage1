@@ -33,7 +33,7 @@ class MenuItem:
 
     # I will use "try-except" because if we will try to assign to a variable the result of manage_connection method but the connection failed in this place our program will crash 
     def save(self): 
-        self.name = self.name.capitalize()
+        self.name = self.name.title() # used title and not capitalise there was no such situation Veggie burger == Veggie Burger?
         try:
             # Check if an item with the same name and price already exists
             check_query = f"SELECT * FROM menu_items WHERE item_name = '{self.name}' AND item_price = '{self.price}'"
