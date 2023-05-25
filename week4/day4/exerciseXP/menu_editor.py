@@ -86,13 +86,14 @@ def show_restaurant_menu():
 
 def show_user_menu():
     while True:
-        print("Program Menu:")
+        print("\n\n----Welcome to the Menu Manager!-----")
+        print("-- What would you like to do? --")
         print("V - View an Item")
         print("A - Add an Item")
         print("D - Delete an Item")
         print("U - Update an Item")
         print("S - Show the Menu")
-        print("Q - Quit the program")
+        print("Q - Quit the program\n")
 
         choice = input("Enter your choice: ").upper()
 
@@ -118,7 +119,6 @@ def view_item():
         print("Item found:")
         print("Name:", item[0][0])
         print("Price:", item[0][1])
-        print (item)
     else:
         print("Item not found.")
 
