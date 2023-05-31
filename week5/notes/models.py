@@ -50,10 +50,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'phonebook',
         'USER': 'postgres',
-        'PASSWORD': 'bubaleh23',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 
-
+class Category(models.Model):
+    name = models.CharField(max_length=20)
