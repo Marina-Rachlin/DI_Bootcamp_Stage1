@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from polls.views import profile
+from polls.views import  add_category_view, add_post_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile/', profile),
+    path('add_category/', add_category_view),
+    path('add_post/',add_post_view),
 ]

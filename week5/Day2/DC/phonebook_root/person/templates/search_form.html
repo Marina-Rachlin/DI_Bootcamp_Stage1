@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Search</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <label for="search_type">Search Type:</label>
+  <select id="search_type" name="search_type">
+    <option value="phonenumber">Phone Number</option>
+    <option value="name">Name</option>
+  </select>
+  <br>
+  <label for="search_query">Search Query:</label>
+  <input type="text" id="search_query" name="search_query" required>
+  <br>
+  <button type="submit">Search</button>
+</form>
+
+</body>
+</html>
