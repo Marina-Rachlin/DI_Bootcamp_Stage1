@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+	<!-- Material CDN -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<!-- StyleSheet -->
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<aside>
+			<div class="top">
+				<div class="logo">
+					<img src="/static/images/logo.png">
+					<h2>Rent<span class ='danger'>Bike</span></h2>
+				</div>
+				<div class="close" id="close-btn">
+					<span class="material-symbols-sharp">close</span>
+				</div>
+			</div>
+			<div class="sidebar">
+				<a href="#">
+					<span class="material-symbols-sharp">grid_view</span>
+					<h3>Dashboard</h3>
+				</a>
+				<a href="customer/list" class="active">
+					<span class="material-symbols-sharp">person</span>
+					<h3>Customers</h3>
+				</a>
+				<a href="rental/list">
+					<span class="material-symbols-sharp">receipt_long</span>
+					<h3>Rentals</h3>
+				</a>
+				<a href="vehicle/">
+					<span class="material-symbols-sharp">
+						inventory
+						</span>
+					<h3>Vehicles</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						insights
+						</span>
+					<h3>Statistics</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						mail
+						</span>
+					<h3>Messages</h3>
+					<span class="message-count">26</span>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						report
+						</span>
+					<h3>Reports</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						settings
+						</span>
+					<h3>Settings</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						add
+						</span>
+					<h3>Add vehicle</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						logout
+						</span>
+					<h3>Logout</h3>
+				</a>
+			</div>
+		</aside>
+		<!-------------- END OF ASIDE --------->
+
+		<main>
+			<div class="recent-orders">
+				<h2>All Customers</h2>
+				<table>
+					<thead>
+						<tr>
+              <th>Customer Id</th>
+							<th>Full Name</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{%for customer in customers %}
+						<tr>
+              <td>{{ customer.id }}</td>
+              <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+              <td><a href="{% url 'customer_detail' customer.pk %}"> Details</a></td>
+            </tr>
+              {%endfor%}
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</div> 
+</body>
+</html>
+
+
+
+<!-- {%for customer in customers %}
+<tr>
+  <td>{{ customer.id }}</td>
+  <td>{{ customer.first_name }}</td>
+  <td>{{ customer.last_name }}</td>
+  <td>{{ customer.email }}</td>
+  <td>{{ customer.phone_number }}</td>
+  <td>{{ customer.address }}</td>
+  <td>{{ customer.city }}</td>
+  <td>{{ customer.country }}</td>
+  {%endfor%} -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Customer List</h2>
+    <ul>
+      {% for customer in customers %}
+        <li><a href="{% url 'customer_detail' customer.pk %}"> {{ customer.first_name }} {{ customer.last_name }}</a></li>
+      {% endfor %}
+    </ul>
+</body>
+</html> -->
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Rental Detail</h2>
+    <p><span style="font-weight: bold;">Customer:</span> {{ rental.customer}}</p>
+    <p><span style="font-weight: bold;">Vehicle:</span> {{ rental.vehicle}}</p>
+    <p><span style="font-weight: bold;">Rental_date:</span> {{ rental.rental_date}}</p>
+
+    {% if rental.return_date %}
+    <p><span style="font-weight: bold;">Returned on:</span> {{ rental.return_date }}</p>
+    {% else %}
+    <p><span style="font-weight: bold;">Returned on: </span><span style="color: red;">Not yet returned</span></p>
+    {% endif %}
+
+    <h2>Customer Details</h2>
+    <p><strong>Name:</strong> {{ customer.first_name }}</p>
+    <p><strong>Name:</strong> {{ customer.last_name }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <p><strong>Phone:</strong> {{ customer.phone_number }}</p>
+    <p><strong>Address:</strong> {{ customer.address }}</p>
+    <p><strong>Name:</strong> {{ customer.city }}</p>
+    <p><strong>Name:</strong> {{ customer.country }}</p>
+
+    <h2>Vehicle Detail</h2>
+    <p><span style="font-weight: bold;">Vehicle type: </span> {{ vehicle.vehicle_type}}</p>
+    <p><span style="font-weight: bold;">Date created: </span> {{ vehicle.date_created}}</p>
+    <p><span style="font-weight: bold;">Real cost: </span> {{ vehicle.real_cost}}</p>
+    <p><span style="font-weight: bold;">Vehicle size: </span> {{ vehicle.vehicle_size}}</p>
+
+    
+</body>
+</html>

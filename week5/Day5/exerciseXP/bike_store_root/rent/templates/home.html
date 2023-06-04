@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+	<!-- Material CDN -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp"/>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<!-- StyleSheet -->
+	<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<aside>
+			<div class="top">
+				<div class="logo">
+					<img src="static/images/logo.png">
+					<h2>Rent<span class ='danger'>Bike</span></h2>
+				</div>
+				<div class="close" id="close-btn">
+					<span class="material-symbols-sharp">close</span>
+				</div>
+			</div>
+			<div class="sidebar">
+				<a href="#">
+					<span class="material-symbols-sharp">grid_view</span>
+					<h3>Dashboard</h3>
+				</a>
+				<a href="customer/" class="active">
+					<span class="material-symbols-sharp">person</span>
+					<h3>Customers</h3>
+				</a>
+				<a href="rental/list">
+					<span class="material-symbols-sharp">receipt_long</span>
+					<h3>Rentals</h3>
+				</a>
+				<a href="vehicle/">
+					<span class="material-symbols-sharp">
+						inventory
+						</span>
+					<h3>Vehicles</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						insights
+						</span>
+					<h3>Statistics</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						mail
+						</span>
+					<h3>Messages</h3>
+					<span class="message-count">26</span>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						report
+						</span>
+					<h3>Reports</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						settings
+						</span>
+					<h3>Settings</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						add
+						</span>
+					<h3>Add vehicle</h3>
+				</a>
+				<a href="#">
+					<span class="material-symbols-sharp">
+						logout
+						</span>
+					<h3>Logout</h3>
+				</a>
+			</div>
+		</aside>
+		<!-------------- END OF ASIDE --------->
+
+		<main>
+			<h1>Dashboard</h1>
+
+			<div class="date">
+				<input type="date">
+			</div>
+
+			<div class="insights">
+
+				<!------------------- SALES------------ -->
+				<div class="sales">
+					<span class="material-symbols-outlined">
+						analytics
+						</span>
+						<div class="middle">
+							<div class="left">
+								<h3>Total Sales</h3>
+								<h1>$25,024</h1>
+							</div>
+
+							<div class="progress">
+								<svg>
+									<circle cx ='38' cy='38' r="36" ></circle>
+								</svg>
+								<div class="number">
+									<p>81%</p>
+								</div>
+							</div>
+						</div>
+							<small class="text-muted">Last 24 hours</small>
+						</div>
+					    <!-----------END OF SALES------------>
+				
+
+				<!------------------- EXPENSES------------ -->
+				<div class="expenses">
+					<span class="material-symbols-outlined">
+						bar_chart
+						</span>
+						<div class="middle">
+							<div class="left">
+								<h3>Total Expenses</h3>
+								<h1>$14,160</h1>
+							</div>
+
+							<div class="progress">
+								<svg>
+									<circle cx ='38' cy='38' r="36" ></circle>
+								</svg>
+								<div class="number">
+									<p>62%</p>
+								</div>
+							</div>
+						</div>
+							<small class="text-muted">Last 24 hours</small>
+						</div>
+						<!-----------END OF EXPENSES------------>
+				
+
+				<!------------------- INCOME------------ -->
+				<div class="income">
+					<span class="material-symbols-outlined">
+						stacked_line_chart
+						</span>
+						<div class="middle">
+							<div class="left">
+								<h3>Total Income</h3>
+								<h1>$10,864</h1>
+							</div>
+
+							<div class="progress">
+								<svg>
+									<circle cx ='38' cy='38' r="36" ></circle>
+								</svg>
+								<div class="number">
+									<p>44%</p>
+								</div>
+							</div>
+						</div>
+							<small class="text-muted">Last 24 hours</small>
+				        </div>
+						<!-----------END OF INCOME------------>
+
+										
+			</div>
+			<div class="recent-orders">
+				<h2>Recent Rentals</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Rental Id</th>
+							<th>Customer</th>
+							<th>Vehicle</th>
+							<th>Rental Date</th>
+							<th>Return Date</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{%for rental in rentals|slice:":7" %}
+						<tr>
+							<td>{{ rental.id }}</td>
+							<td>{{ rental.customer }}</td>
+							<td>{{ rental.vehicle }}</td>
+							<td>{{ rental.rental_date }}</td>
+							<td>{{ rental.return_date }}</td>
+							{% if rental.return_date %}
+								<td class="success">Returned</td>
+							{% else %}
+								<td class="danger">Not returned yet</td>
+							{% endif %}
+							<td><a href="{% url 'rental_detail' rental.pk %}">Details</a></td>
+						</tr>
+						{%endfor%}
+						
+					</tbody>
+				</table>
+				<a href="rental/list">Show all</a>
+			</div>
+		</main>
+
+		<div class="right">
+			<div class="add-buttons">
+				<a href="rental/add" class="add-button">Add Rental</a>
+				<a href="customer/add" class="add-button">Add Customer</a>
+				<a href="vehicle/add" class="add-button">Add Vehicle</a>
+			  </div>
+		</div>
+	</div> 
+</body>
+</html>

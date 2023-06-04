@@ -58,3 +58,14 @@ DATABASES = {
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
+
+
+
+
+     # path('rental/add/', RentalCreateView.as_view(), name='rental_add'),
+    # path('customer/', CustomerListView.as_view(), name='customer_list'),
+    # path('customer/<int:pk>/', CustomerDetailView.as_view(), name='customer_detail'),
+    # path('customer/add/', CustomerCreateView.as_view(), name='customer_add'),
+    # path('vehicle/', VehicleListView.as_view(), name='vehicle_list'),
+    # path('vehicle/<int:pk>/', VehicleDetailView.as_view(), name='vehicle_detail'),
+    # path('vehicle/add/', VehicleCreateView.as_view(), name='vehicle_add'),
