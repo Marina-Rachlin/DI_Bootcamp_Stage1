@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Person</title>
 </head>
 <body>
-
     {% if person %}
-    <h3>Name: {{person.name}}, email:{{person.email}}, adr{{person.address}} </h3>
-    {% else %}
-        <h1>The person isn't found.</h1>
-    {% endif %}
+        <h3>{{person.phone_number}}</h3>
 
+        <p>{{person.name}}</p>
+        <p>{{person.email}}</p>
+        <p>{{person.address}}</p>
+    {% else %}
+        <p>Sorry, this phone_number not found, try again</p>
+    {% endif %}
 </body>
 </html>

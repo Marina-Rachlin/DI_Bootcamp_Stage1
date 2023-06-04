@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from person.views import  by_name, by_phone
+from person.views import  search_phone, phonenumber, name
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('persons/phonenumber/<str:phonenumber>', by_phone),
-    path('persons/name/<str:name_search>', by_name),
+    path('person/phonenumber/<str:number>/', phonenumber, name="phone"),
+    path('person/name/<str:input_name>/', name, name='name'),
+    path('search-phone/', search_phone, name='search_phone'),
 ]
 
 
