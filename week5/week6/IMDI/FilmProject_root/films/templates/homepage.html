@@ -13,13 +13,28 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ film.title }}</h5>
-                            <p class="card-text">
+                            <h2 class="card-title">{{ film.title }}</h2>
+                            <p class="card-text"><span style="font-weight: bold;">Director:</span>
                                 {% for director in film.director.all %}
                                     {{ director }}{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </p>
-                            <p class="card-text">Release Date: {{ film.release_date|date:"F j, Y" }}</p>
+                            <p class="card-text"><span style="font-weight: bold;">Category:</span>
+                                {% for category in film.category.all %}
+                                    {{ category }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}</p>
+                            <p class="card-text"><span style="font-weight: bold;">Release Date:</span> {{ film.release_date|date:"F j, Y" }}</p>
+                        </div>
+
+                        <div class="card-footer bg-transparent">
+                            <a href="{% url 'addReview' film.id %}" class="btn btn-primary">Add Review</a>
+                            <hr>
+                            {% for review in film.reviews.all %}
+                                <p style="color: grey"><u>Review #{{ review.id }}</u> {{ review.review_text }}</p>
+                                <hr>
+                            {% empty %}
+                                <p>There is no reviews yet</p>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
