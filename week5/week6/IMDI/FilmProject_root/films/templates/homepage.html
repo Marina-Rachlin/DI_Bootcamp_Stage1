@@ -1,0 +1,34 @@
+{% extends 'partials/base.html' %} 
+
+{% block navbar %}
+    {% include 'partials/navbar.html'%}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>New Films</h1>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+            {% for film in films %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ film.title }}</h5>
+                            <p class="card-text">
+                                {% for director in film.director.all %}
+                                    {{ director }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            <p class="card-text">Release Date: {{ film.release_date|date:"F j, Y" }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
