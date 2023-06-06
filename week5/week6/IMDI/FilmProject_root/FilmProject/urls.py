@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from films import urls
+from accounts import urls
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include(urls))
+    # path('', include('films.urls')),  # URLs from the films app
+    # path('accounts/', include('accounts.urls')),
+    path('films/', include('films.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
