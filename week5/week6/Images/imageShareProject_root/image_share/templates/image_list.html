@@ -1,0 +1,19 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+  <h2>Image List</h2>
+  {% if images %}
+    <ul>
+      {% for image in images %}
+        <li>
+          <h3>{{ image.title }}</h3>
+          <p>{{ image.description }}</p>
+          <p>Uploaded by: {{ image.user.username }}</p>
+          <img src="{{ image.image_file.url }}" alt="{{ image.title }}">
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No images available.</p>
+  {% endif %}
+{% endblock %}

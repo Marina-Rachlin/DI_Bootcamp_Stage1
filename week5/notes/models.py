@@ -56,8 +56,34 @@ DATABASES = {
     }
 }
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR / "static")
+]
+
+# Media files (Uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = Path(BASE_DIR / 'media')
+
 class Category(models.Model):
     name = models.CharField(max_length=20)
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('image_list')
+        else:
+            error_message = "Invalid username or password."
+            return render(request, 'image_share/login.html', {'error_message': error_message})
+    return render(request, 'image_share/login.html')
 
 
 

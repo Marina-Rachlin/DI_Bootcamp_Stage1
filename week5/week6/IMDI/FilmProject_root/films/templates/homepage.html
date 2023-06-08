@@ -17,6 +17,9 @@
             {% for film in films %}
                 <div class="col">
                     <div class="card">
+                        <p>{{ film.poster.explanation_img }}</p>
+                        <p>{{ film.poster.image }}</p>
+                        <img style='width: 150px; height: 200px; margin-bottom: 10px;' src='{{ film.poster.image.url }}' alt='{{ poster.explanation_img }}'>
                         <div class="card-body">
                             <h2 class="card-title">{{ film.title }}</h2>
                             <p class="card-text"><span style="font-weight: bold;">Director:</span>
@@ -56,7 +59,6 @@
     
 {% endif %}
 {% endblock %}
-
 
 
 

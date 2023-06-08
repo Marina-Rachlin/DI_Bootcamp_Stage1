@@ -7,10 +7,14 @@
 
     <div class="container mt-4">
         <h1>Add Film</h1>
-        <form method="post">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-primary" type="submit">Add Film</button>
+          
+            <div class="form-group">
+              <label for="{{ form.poster_image.id_for_label }}"></label>
+            </div>
+            <button type="submit">Add Film</button>
         </form>
     </div>
 {% endblock %}

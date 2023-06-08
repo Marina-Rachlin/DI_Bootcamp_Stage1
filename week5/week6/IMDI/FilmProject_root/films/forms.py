@@ -1,5 +1,5 @@
 from django import forms
-from .models import Director, Film, Review
+from .models import Director, Film, Review, Poster
 
 
 class FilmForm(forms.ModelForm):
@@ -22,4 +22,26 @@ class ReviewForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['review_text'].widget = forms.Textarea(attrs={'rows': 3})
         self.fields['rating'].widget = forms.RadioSelect(choices=[(i, i) for i in range(1, 6)])
-        
+
+
+class AddPosterForm(forms.ModelForm):
+    class Meta:
+        model = Poster
+        fields = ['image', 'explanation_img']
+
+
+class AddFilmWithPosterForm(forms.ModelForm):
+    poster_image = forms.ImageField(required=True, label='Poster Image')
+    poster_explanation_img = forms.CharField(max_length=255, required=True, label='Poster Explanation')
+
+    class Meta:
+        model = Film
+        fields = ['title', 'release_date', 'created_in_country', 'available_in_countries', 'category', 'director']
+
+    def save(self, commit=True):
+        film = super().save(commit=False)
+        if commit:
+            film.save()
+        poster = Poster(film=film, image=self.cleaned_data['poster_image'], explanation_img=self.cleaned_data['poster_explanation_img'])
+        poster.save()
+        return film

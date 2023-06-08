@@ -1,5 +1,8 @@
 from django.db import models
 import datetime
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Country(models.Model):
@@ -7,13 +10,14 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
+        
 class Category(models.Model):
-    name = models.CharField(max_length=50) 
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
+
 
 class Director(models.Model):
     first_name = models.CharField(max_length=100)
@@ -42,6 +46,32 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.film} {self.review_text}'
+    
+
+class Poster(models.Model):
+    film = models.OneToOneField(Film, on_delete=models.CASCADE, primary_key=True)
+    # image = models.ImageField(upload_to='posters/')
+    image = models.ImageField(upload_to='posters/')
+    explanation_img = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f'Poster for {self.film.title}'
+    
+
+class FavoriteFilm(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorite_films')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='favorited_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'film')
+    
+
+
+    
+
+
+
 
 
 
