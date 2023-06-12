@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap');
+
+/*-----------ROOT VARIABLES----------*/
+
+:root {
+    --grid-gutter-width: 20px;
+    --total-columns: 12;
+    --container-padding: 20px;
+    --container-width: 1360px;
+    --padding-bottom-p: 20px;
+    --color-a: #202020;
+    --color-b: #9B9B9B;
+    --color-c: #646464;
+    --color-d: #FBFAF9;
+    --color-e: #202020;
+    --color-f: #AF884A;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --wrapper-fluid: 90px;
+    --header-height: 85px;
+    --footer-height: 70px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: 0;
+    appearance: none;
+    outline: 0;
+}
+
+html, body{
+    font-size: 14px;
+    line-height: normal;
+    letter-spacing: 0.01em;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 0;
+    margin: 0;
+    /* height: auto; */
+    width: 100%;
+    height: 100vh;
+    background-image: url("images/Fachada.jpg");
+    background-size: cover;
+    background-color: var(--color-d);
+}
+
+
+

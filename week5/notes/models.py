@@ -43,6 +43,13 @@ class Category(models.Model):
 # category_science.save()
 # post_science = Post(title='Mars', content='bla bla', author='Ben', category=category_science)
 # post_science.save()
+class StudentListCreateView(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
 
 DATABASES = {
