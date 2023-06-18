@@ -1,5 +1,6 @@
 from django import forms
-from .models import Director, Film, Review, Poster
+from django.forms import formset_factory
+from .models import *
 
 
 class FilmForm(forms.ModelForm):
@@ -10,7 +11,12 @@ class FilmForm(forms.ModelForm):
 class DirectorForm(forms.ModelForm):
     class Meta:
         model = Director
-        fields = '__all__'       
+        fields = '__all__' 
+
+class ProducerForm(forms.ModelForm):
+    class Meta:
+        model = Producer
+        fields = '__all__'      
 
 
 class ReviewForm(forms.ModelForm):
@@ -45,3 +51,5 @@ class AddFilmWithPosterForm(forms.ModelForm):
         poster = Poster(film=film, image=self.cleaned_data['poster_image'], explanation_img=self.cleaned_data['poster_explanation_img'])
         poster.save()
         return film
+
+ProducerFormSet = forms.modelformset_factory(model=Producer, form=ProducerForm)

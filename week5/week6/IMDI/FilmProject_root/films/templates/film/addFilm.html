@@ -7,14 +7,19 @@
 
     <div class="container mt-4">
         <h1>Add Film</h1>
-        <form method="POST" enctype="multipart/form-data">
+        <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-          
-            <div class="form-group">
-              <label for="{{ form.poster_image.id_for_label }}"></label>
-            </div>
-            <button type="submit">Add Film</button>
+            
+            {% for producer_form in formset %}
+                {{ producer_form.as_p }}
+            {% endfor %}
+            
+            {{ formset.management_form }}
+            
+            <button type="submit">Submit</button>
         </form>
+        
     </div>
 {% endblock %}
+

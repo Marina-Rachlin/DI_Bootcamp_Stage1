@@ -12,8 +12,8 @@ class StudentListCreateView(generics.ListCreateAPIView):
     def get_queryset(self):
         queryset = super().get_queryset()
         date_joined_param = self.request.query_params.get('date_joined')
-        year, month, day = date_joined_param.split('-')
         if date_joined_param:
+            year, month, day = date_joined_param.split('-')
             queryset = queryset.filter(date_joined__year=year, 
                                        date_joined__month=month,
                                        date_joined__day=day)
@@ -22,7 +22,7 @@ class StudentListCreateView(generics.ListCreateAPIView):
 
 class StudentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
-    serializer_class = StudentSerializer 
+    serializer_class = StudentSerializer
 
     
 
