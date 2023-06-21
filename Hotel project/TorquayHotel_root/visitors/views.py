@@ -1,14 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.auth.views import LoginView
 from django.views.generic.edit import CreateView
 from django.urls import reverse
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
-from django.core import serializers
-import json
 
 
 def homepage(request):
@@ -67,8 +64,8 @@ def booking_page(request):
 
             # Call the get_vacancies function and store the returned values in variables
             available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
-            context = {'available_rooms': available_rooms}
-            return redirect('visitors:vacancies', **context)
+            # {'available_rooms': available_rooms}
+            return redirect('visitors:vacancies', {'available_rooms': available_rooms})
         
     context = {'form': form}
     return render(request, 'booking.html', context)
