@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap');
+
+/*=================ROOT VARIABLES==============*/
+
+:root {
+    --grid-gutter-width: 20px;
+    --total-columns: 12;
+    --container-padding: 20px;
+    --container-width: 1360px;
+    --padding-bottom-p: 20px;
+    --color-a: #202020;
+    --color-b: #9B9B9B;
+    --color-c: #646464;
+    --color-d: #FBFAF9;
+    --color-e: #202020;
+    --color-f: #AF884A;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --wrapper-fluid: 90px;
+    --header-height: 85px;
+    --footer-height: 70px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: 0;
+    outline: 0;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: 0.01em;
+    line-height: normal;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: sans-serif;
+    text-align: center;
+    color: var(--color-white);
+    font-size: 24px;
+}
+
+section{
+    display:flex;
+    flex-direction: column;
+}
+
+
+footer{
+    background: var(--color-a);
+    margin-top: 5%; 
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;  
+    padding: 40px 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    /* padding: 0px calc( var(--wrapper-fluid) - (var(--container-padding) / 2)); */
+}
+
+@media screen and (max-width: 895px) {
+    .row {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+} 
+
+.footer-link {
+    font-size: 15px;
+    line-height: 22px;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    display: block;
+    margin-right: 40px;
+    cursor: pointer;
+    color: var(--color-white);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.footer-link:not(:last-child)::before {
+    content: "/";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    color: var(--color-white);
+    transform: translate(50%, -50%);
+}
+
+.socials,
+.info{
+    display: flex;
+    align-items: center;
+}

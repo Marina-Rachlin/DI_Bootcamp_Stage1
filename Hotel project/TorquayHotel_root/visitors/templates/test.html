@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
+</head>
+<body>
+
+
+<!-- first page -->
+    <section class="first">
+        <header>
+            <nav class="navbar">
+                <a href="#" class="logo">Torquay</a>
+                <ul class="nav-links">
+                  {% if user.is_authenticated %}
+                    <h2 style="padding-right: 1.5rem;">Welcome, {{ user.username }}</h2>
+                    <li><a href="{% url 'visitors:logout' %}">Logout</a></li>
+                  {% else %}
+                    <li><a href="{% url 'visitors:signup' %}">Register</a></li>
+                    <li><a href="{% url 'visitors:login' %}">Login</a></li>
+                  {% endif %}
+                    <li><a href="#">EN</a></li>
+                    <li><a href="{% url 'visitors:booking_page' %}">BOOK NOW</a></li>
+                    <a href="#" class="menu-link" id="toggleMenu">Menu</a>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ==================sidenav=========== -->
+
+        <div class="sidenav rev-block-left" id="sidenav">
+
+            <ul class="sidenavbar">
+                <li><a href = "#">Torquay Boutique</a></li>
+                <li><a href = "#">Rooms</a></li>
+                <li><a href = "#">Offers</a></li>
+                <li><a href = "#">Dining</a></li>
+                <li><a href = "#">Spa</a></li>
+                <li><a href = "#">Experiencies</a></li>
+                <li><a href = "#">Meetings&Events</a></li>
+                <li><a href = "#">Gallery</a></li>
+                <li><a href = "#">Contact us</a></li>
+            </ul>
+
+            <div class="follow-wrapper">
+                <span>Follow us</span>
+                <a href="#"><i class="fa-brands fa-facebook" style="color: #ffffff;"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" style="color: #ffffff;"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok" style="color: #fcfcfd;"></i></a>
+            </div>
+        </div>
+
+
+        <div class="sidenav2 rev-block-right" id="sidenav2">
+            <a href="#" class="menu-link-close" id="toggleClose">Close</a>
+            <img class="sidenav-img" alt ='' src="/static/images//tdyfugh.jpeg">
+            <span>Double Room</span>
+        </div>
+
+
+        <!-- ============end of sidenav============= -->
+
+        <div class="main">
+            <main>
+                <h3 class="slogan">Your new Boutique Hotel in Torquay</h3>
+            </main>
+        </div>
+    
+        
+        <div class="booking-line">
+            <a href="#" class="link-with-form">
+                No. of guests <i class="fa-solid fa-caret-down" style="color: #fafafa;"></i></a>
+            <span>from</span>
+            <a href="#" class="link-with-form">
+                16 June <i class="fa-solid fa-caret-down" style="color: #ffffff;"></i></a>
+            <span>to</span>
+            <a href="#" class="link-with-form">
+                Select date  <i class="fa-solid fa-caret-down" style="color: #ffffff;"></i></a>
+            <a href="#" class="link-with-form">Check Availability</a>
+        </div>
+
+    </section>
+
+<!-- second page -->
+
+    <section>
+        <div class="upper-section">
+            <div class="column-title">
+              <h2>Welcome to Torquay</h2>
+            </div>
+            <div class="column-text">
+              <p>An enchanting coastal town, nestled amidst breathtaking landscapes, and adorned with timeless charm. Immerse yourself in our tranquil haven, designed for the discerning traveler and connoisseur. Experience a class beyond compare.</p>
+            </div>
+          </div>
+    
+          <div class="grid-container">
+            <div class="grid-item v-stretch">
+              <img src="/static/images/Swiss+Alps+Photographer+Murren+Fotomagoria+24 (1).jpg" alt="Image 1">
+              <a href="#" class="content">Arrival and Contacts</a>
+            </div>
+            <div class="grid-item image">
+              <img src="/static/images/torquya/image-asset.jpeg" alt="Image 2">
+              <a href="#" class="content">Experiences</a>
+            </div>
+            <div class="grid-item v-stretch">
+              <img src="/static/images/dining/3.webp" alt="Image 3">
+              <a href="#" class="content">Dining</a>
+            </div>
+            <div class="grid-item image">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/br3ig82_SgI?autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen></iframe>
+                <a href="#" class="content">Spa</a>
+            </div>
+            <div class="grid-item big-stretch">
+              <img src="/static/images/meetings/elmoderne-hotel-gijon-sala-de-reuniones-model-U.jpg" alt="Image 5">
+              <a href="#" class="content">Conference</a>
+            </div>
+          </div>
+    </section>      
+
+<!-- third page -->
+
+    <section>
+      <div class="upper-section">
+          <div class="column-title">
+            <h2>Dining</h2>
+          </div>
+          <div class="column-text">
+            <p>At the Torquay, dining is an artistic expression that knows no limits. Our culinary offerings embrace sensuality and variety, taking you on a gastronomic journey like no other. From homemade pizzas straight from the stone oven to avant-garde creations, we redefine the boundaries of taste and quality.</p>
+          </div>
+        </div>
+
+        <div class="grid-container">
+          <div class="grid-item v-stretch">
+            <img src="/static/images/dining/1.jpg" alt="Image 1">
+            <a href="#" class="content">Arrival and Contacts</a>
+          </div>
+          <div class="grid-item image">
+            <img src="/static/images/dining/2.jpeg" alt="Image 2">
+            <a href="#" class="content">Experiences</a>
+          </div>
+          <div class="grid-item v-stretch">
+            <img src="/static/images/dining/6.webp" alt="Image 3">
+            <a href="#" class="content">Dining</a>
+          </div>
+          <div class="grid-item image">
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/br3ig82_SgI?autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen></iframe>
+              <a href="#" class="content">Spa</a>
+          </div>
+          <div class="grid-item big-stretch">
+            <img src="/static/images/dining/5.jpg" alt="Image 5">
+            <a href="#" class="content">Conference</a>
+          </div>
+        </div>
+
+    </section>
+        
+
+<!-- =================4 page - ROOMS SECTION================== -->
+        <section>
+          <div class="upper-section">
+              <div class="column-title">
+                <h2>Rooms</h2>
+              </div>
+              <div class="column-text">
+                <p>Experience luxurious comfort and impeccable style in our exquisite rooms. Each room is meticulously designed to provide a serene and inviting atmosphere for your stay. From spacious suites to cozy retreats, our accommodation options cater to every traveler's needs.</p>
+              </div>
+            </div>
+      
+            <div class="grid-container-rooms">
+              <div class="room-item">
+                <img class="slide1" src="/static/images/rooms/7132-hotel-scenic_retreats-vals-hotel-5s-double_room-20230116-357a9096.webp" alt="Room 1">
+                <div class="room-content">
+                    <div class="arrows">
+                      <a a href="#" class="arrow arrow-left"><i class="fa-solid fa-angle-left fa-lg"></i></a>
+                      <a href="#" class="arrow arrow-right"><i class="fa-solid fa-angle-right fa-lg"></i></a>
+                    </div>
+                    <a href="{% url 'visitors:rooms_page' %}" class="content">Double</a>
+                    <a href="#slide2" class="content">Double Loft</a>
+                    <a href="#slide3" class="content">Unique Junior Suit</a>
+                    <a href="#slide4" class="content">Unique Junior Loft Suit</a>
+                  </div>
+                </div>
+              </div>  
+         </section>
+
+         <!-- newsletter section -->
+
+         <div class="newsletter">
+            <h2 class="title">Newsletter</h2>
+            <div class="form-wrapper">
+                <div class="form-field">
+                <input type="text" class="name" name="name" placeholder="Name">
+                <input type="email" class="email" name="email" placeholder="Email">
+                </div>
+                <button class="subscribe-btn">Subscribe</button>
+            </div>
+          
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="checkbox" name="vehicle1" value="Bike">
+                <label for="checkbox">I have read and accept the data protection law *</label><br>
+            </div>
+         </div>
+
+
+         <!-- ==================Footer================ -->
+
+         <footer>
+            <hr>
+            <div class="row">
+                <div class="socials">
+                    <a href="#" class="footer-link">Facebook</a>
+                    <a href="#" class="footer-link">Instagram</a>
+                    <a href="#" class="footer-link">TikTok</a>
+                </div>
+                <div class="info">
+                    <a href="#" class="footer-link">+ 123456789</a>
+                    <a href="#" class="footer-link">info@example.com</a>
+                    <a href="#" class="footer-link">123 Street, Torquay</a>
+                </div>
+            </div>
+        </footer>
+
+    <script src="https://kit.fontawesome.com/c7bb54256c.js" crossorigin="anonymous"></script>
+
+<!-- Include the JavaScript code -->
+<script>
+    const menuLink = document.getElementById('toggleMenu');
+    const sidenav = document.getElementById('sidenav');
+    const sidenav2 = document.getElementById('sidenav2');
+    const toggleClose = document.getElementById('toggleClose');
+  
+    menuLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      sidenav.classList.add('visible');
+      sidenav2.classList.add('visible');
+    });
+  
+    toggleClose.addEventListener('click', function(e) {
+      e.preventDefault();
+      sidenav.classList.remove('visible');
+      sidenav2.classList.remove('visible');
+    });
+  
+    // Add event listener to the document to handle clicks outside the menu
+    document.addEventListener('click', function(event) {
+      const target = event.target;
+      if (!target.closest('#sidenav') && !target.closest('#sidenav2') && !target.matches('#toggleMenu')) {
+        sidenav.classList.remove('visible');
+        sidenav2.classList.remove('visible');
+      }
+    });
+</script>
+
+  
+  
+  
+</body>
+</html>

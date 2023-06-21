@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap');
+
+/*=================ROOT VARIABLES==============*/
+
+:root {
+    --grid-gutter-width: 20px;
+    --total-columns: 12;
+    --container-padding: 20px;
+    --container-width: 1360px;
+    --padding-bottom-p: 20px;
+    --color-a: #202020;
+    --color-b: #9B9B9B;
+    --color-c: #646464;
+    --color-d: #FBFAF9;
+    --color-e: #202020;
+    --color-f: #AF884A;
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --wrapper-fluid: 90px;
+    --header-height: 85px;
+    --footer-height: 70px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border: 0;
+    /* appearance: none; */
+    outline: 0;
+    font-size: 18px;
+    line-height: normal;
+    letter-spacing: 0.01em;
+    line-height: normal;
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: sans-serif;
+    text-align: center;
+    color: var(--color-white);
+    font-size: 24px;
+}
+
+section{
+    display:flex;
+    flex-direction: column;
+}
+
+.room{
+    
+        background-image: url(images/Fachada.jpg);
+        background-size: cover;
+        height: 90vh;
+}
+
+.upper-section {
+    display: flex;
+    flex-wrap: wrap;
+    color: #333333;
+    text-align: left;
+    margin: 10% 10% 2% 10%;
+}  
+
+
+.column-title, .column-text {
+    flex: 1;
+  }
+
+.column-title  h2{
+    font-size: 40px;
+    font-weight: 700;
+    color: #333333;
+  }
+  
+.column-text p{
+    font-weight: 600;
+    color: #333333;
+    font-size: 15px;
+  }
+
+@media screen and (max-width: 859px) {
+    .upper-section {
+   flex-direction: column;
+   align-items: center;
+    }
+} 
+
+/* =================Gallery================== */
+
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(11, 120px);
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    margin: 10% 10% 0 10%;
+  }
+  
+  .grid-item {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .grid-item .content{
+    position: absolute;
+    inset: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .grid-item img,
+  .grid-item .content{
+    transition: 300ms ease-in-out;
+  }
+  
+  .grid-item > .content{
+    opacity: 0;
+  }
+  
+  .grid-item:hover > img,
+  .grid-item:hover > iframe{
+     filter: grayscale(.3);
+  }
+
+  .grid-item:hover > .content{
+    opacity: 1;
+  }
+  
+  .grid-item:hover > img,
+  .grid-item:hover > iframe{
+    transform: scale(1.1);
+  }
+  
+  .image{
+    grid-row-end: span 3; 
+  }
+  
+  .v-stretch {
+    grid-row-end: span 5; 
+  }
+  
+  
+  .big-stretch {
+    grid-column-end: span 2;
+    grid-row: span 3;
+  } 

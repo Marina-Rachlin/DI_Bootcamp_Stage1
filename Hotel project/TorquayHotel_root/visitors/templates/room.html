@@ -1,0 +1,49 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/room.css' %}">
+</head>
+<body>
+    <section>
+
+        <div class="image-container">
+            <img src="/static/images/rooms/main.webp" alt="Image" style="height: 100vh; width: 100%;">
+          </div>
+
+        <div class="upper-section">
+            <div class="column-title">
+              <h2>Double room</h2>
+            </div>
+            <div class="column-text">
+              <p>
+                A huge bed (or two separate beds). The pillow that represents the rest of our dreams and desires. An enormous white bathroom where nothing can distract you from yourself, with that round mirror that holds your gaze. Silence. The dim lighting. It’s time for that marvellous shower that revives you, to wrap yourself up in the thick, fluffy towel and to sit in the picture window for a while. We’ll see each other later at Bar & Champagne and we’ll have a drink before heading out to dinner..</p>
+            </div>
+          </div>
+  
+          <div class="grid-container">
+            <div class="grid-item v-stretch">
+              <img src="/static/images/room1-3.webp" alt="Image 1">
+              <a href="#" class="content" style="font-weight: bold; font-size: 18px;">Good to know</a>
+            </div>
+            <div class="grid-item image">
+              <img src="/static/images/rooms/room1-2.webp" alt="Image 2">
+              <a href="#" class="content">Gallery</a>
+            </div>
+            <div class="grid-item v-stretch">
+              <img src="/static/images/rooms/4.webp" alt="Image 3">
+              <a href="#" class="content">Reviews</a>
+            </div>
+            <div class="grid-item image">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/br3ig82_SgI?autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen></iframe>
+                <a href="#" class="content">Book</a>
+            </div>
+          </div>
+      </section>
+</body>
+</html>

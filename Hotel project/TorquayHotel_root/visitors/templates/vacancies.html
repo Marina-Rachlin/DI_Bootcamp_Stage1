@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Room Options</title>
+</head>
+<body>
+    <h1>Available Room Options</h1>
+    {% if available_rooms %}
+        <ul>
+            {% for room in available_rooms %}
+                <li>{{ room.category.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No available room options at the moment.</p>
+    {% endif %}
+</body>
+</html>
