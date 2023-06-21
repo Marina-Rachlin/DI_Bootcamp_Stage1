@@ -14,11 +14,18 @@ def homepage(request):
 def rooms_page(request):
     return render(request, 'room.html')
 
+def booking_room_view(request):
+    return render(request, 'room.html')
+
 
 def category_view(request, category_id):
     category = Category.objects.get(id=category_id)
     context = {'category': category}
     return render(request, 'category_details.html', context)# fix the names
+
+def vacancies_view(request, available_rooms):
+    context = {'available_rooms': available_rooms}
+    return render(request, 'vacancies.html', context)
 
 class SignupView(CreateView):
     form_class = SignupForm
@@ -64,8 +71,7 @@ def booking_page(request):
 
             # Call the get_vacancies function and store the returned values in variables
             available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
-            # {'available_rooms': available_rooms}
-            return redirect('visitors:vacancies', {'available_rooms': available_rooms})
+            return render(request, 'vacancies.html', {'available_rooms': available_rooms})
         
     context = {'form': form}
     return render(request, 'booking.html', context)
@@ -73,30 +79,16 @@ def booking_page(request):
 
 def get_vacancies(check_in_date, check_out_date, num_guests):
     """
-    Get a list of available room options for the given date range and number of guests.
-    Returns one room option per room type.
+    Get a list of available room options for the given date range and number of guests (one option per room category).
     """
     conflicting_bookings = Booking.objects.filter(
-        Q(check_in_date__lt=check_out_date) & Q(check_out_date__gt=check_in_date) & Q(num_guests__gte=num_guests)
+        Q(check_in_date__lt=check_out_date) & Q(check_out_date__gt=check_in_date)
     )
-
     booked_rooms = [booking.room for booking in conflicting_bookings]
-    all_rooms = Room.objects.all()
-    available_rooms = []
+    room_types = Category.objects.filter(capacity__gte=num_guests)
+    available_rooms = [room.category for room in Room.objects.all() if room.category in room_types and room not in booked_rooms]
 
-    room_types = set(room.category for room in all_rooms)
-
-    for room_type in room_types:
-        room_options = [room for room in all_rooms if room.category == room_type and room not in booked_rooms]
-        if room_options:
-            available_rooms.append(room_options[0].category)  # Append the first room option of the room type
-
-    # print(available_rooms)
     return available_rooms
-
-def vacancies_view(request, available_rooms):
-    context = {'available_rooms': available_rooms}
-    return render(request, 'vacancies.html', context)
 
 
 

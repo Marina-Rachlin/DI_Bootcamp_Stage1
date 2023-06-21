@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', logout_view, name = 'logout'),
     path('profile/<int:user_id>/', profile_view, name='profile'),
     path('rooms/<int:category_id>/', views.category_view, name='category_view'),
-     path('vacancies/', views.vacancies_view, name='vacancies'),
+    path('vacancies/', views.vacancies_view, name='vacancies'),
+    path('rooms/', views.booking_room_view, name='booking_room_view'),
 ]
 
 

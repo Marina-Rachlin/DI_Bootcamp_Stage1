@@ -1,0 +1,13 @@
+#container {
+    background-color: lightblue;
+    padding: 10px;
+  }
+  
+  .attendance {
+    color: red;
+  }
+  
+  .university {
+    font-weight: bold;
+  }
+  
