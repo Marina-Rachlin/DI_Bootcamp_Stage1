@@ -2,6 +2,21 @@
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;// we can do it like this : Math.floor(Math.random() * 11)
   }
+
+  // Function to validate the number input
+  function getValidNumberInput() {
+    while (true) {
+      const userInput = Number(prompt("Enter a number between 0 and 10:"));
+  
+      if (isNaN(userInput)) {
+        alert("Sorry, not a number. Try again.");
+      } else if (userInput < 0 || userInput > 10) {
+        alert("Sorry, it's not a good number. Try again.");
+      } else {
+        return userInput;
+      }
+    }
+  }
   
   // Function to compare the user's number with the computer's number
   function compareNumbers(userNumber, computerNumber) {
@@ -20,7 +35,7 @@ function getRandomNumber(min, max) {
       }
   
       counter++;
-      userNumber = parseInt(prompt("Enter a new number:"));
+      userNumber = getValidNumberInput();
     }
   
     alert("Out of chances");
@@ -33,19 +48,7 @@ function getRandomNumber(min, max) {
     if (!playGame) {
       alert("No problem, Goodbye.");
     } else {
-      let userNumber;
-  
-      while (true) {
-        userNumber = parseInt(prompt("Enter a number between 0 and 10:"));
-  
-        if (isNaN(userNumber)) {
-          alert("Sorry, not a number. Try again.");
-        } else if (userNumber < 0 || userNumber > 10) {
-          alert("Sorry, it's not a good number. Try again.");
-        } else {
-          break;
-        }
-      }
+      const userNumber = getValidNumberInput();
   
       const computerNumber = getRandomNumber(0, 10);
       compareNumbers(userNumber, computerNumber);
