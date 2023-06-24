@@ -77,7 +77,8 @@ def reservation(request):
             guest_details = guest_details_form.save(commit=False)
             guest_details.user = user
             guest_details.save()
-            room = get_object_or_404(Room, category=room)
+            # retrieve the first available room of chosen category
+            room = Room.objects.filter(category=category).first()
 
             # Create a booking object
             booking = Booking.objects.create(
