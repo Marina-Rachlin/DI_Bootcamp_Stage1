@@ -24,17 +24,24 @@ class CheckAvailabilityForm(forms.Form):
     num_guests = forms.IntegerField()   
 
 
-class GuestDetailsForm(forms.Form):
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    phone = forms.CharField(max_length=20)
-    email = forms.EmailField()
-    country = forms.CharField(max_length=100)
-    city = forms.CharField(max_length=100)
-    zip_code = forms.CharField(max_length=20)
-    additional_details = forms.CharField(widget=forms.Textarea)
-    preferences = forms.CharField(widget=forms.Textarea)     
+class GuestDetailsForm(forms.ModelForm):
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
+    class Meta:
+        model = GuestDetails
+        fields = ['first_name', 'last_name', 'phone', 'email', 'country', 'city', 'zip_code', 'additional_details']
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(GuestDetailsForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['first_name'].initial = user.first_name
+            self.fields['last_name'].initial = user.last_name
+
+# class BookingGuestForm(forms.Form):
+#     booking_form = BookingForm()
+#     guest_details_form = GuestDetailsForm()
 
 # class BookingForm(forms.Form):
 #     check_in_date = forms.DateField(label='Check-in Date')

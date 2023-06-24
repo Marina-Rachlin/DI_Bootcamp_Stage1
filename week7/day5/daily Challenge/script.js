@@ -1,8 +1,8 @@
 function singSong() {
-    let numBottles = parseInt(prompt("Enter the number of bottles to start with:"));
+    let numBottles = Number(prompt("Enter the number of bottles to start with:"));
   
     if (isNaN(numBottles) || numBottles < 0) {
-      console.log("Invalid input. Please enter a positive number.");
+      alert("Invalid input. Please enter a positive number.");
       return;
     }
   

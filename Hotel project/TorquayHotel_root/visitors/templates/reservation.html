@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservation</title>
+</head>
+<body>
+    <h1>Reservation Details</h1>
+    <p>Room: {{ room }}</p>
+    <p>Check-in date: {{ check_in_date }}</p>
+    <p>Check-out date: {{ check_out_date }}</p>
+    <p>Number of guests: {{ num_guests }}</p>
+    <p>user_name: {{ user }}</p>
+
+    <h2>Guest Details</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+      </form>
+</body>
+</html>

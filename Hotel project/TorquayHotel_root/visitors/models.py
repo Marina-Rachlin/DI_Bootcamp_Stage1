@@ -48,16 +48,29 @@ class UpcomingEvents(models.Model):
     def __str__(self):
         return self.title
 
-   
+class GuestDetails(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20)
+    email = models.EmailField()
+    country = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=20)
+    additional_details = models.TextField()
+
+    def __str__(self):
+        return self.user.username
+
+
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     num_guests = models.PositiveIntegerField()
-    payment_status = models.CharField(max_length=20, choices=[('Paid', 'Paid'), ('Pending', 'Pending')])
-    special_requirements = models.TextField(blank=True)
+    payment_status = models.CharField(max_length=20, default='Pending', choices=[('Paid', 'Paid'), ('Pending', 'Pending')])
     created_at = models.DateTimeField(auto_now_add=True)
+    guest_details = models.OneToOneField(GuestDetails, on_delete=models.CASCADE, default=None)
+
 
     def __str__(self):
         return f"Booking for Room {self.room.category.name - self.room.room_number}"

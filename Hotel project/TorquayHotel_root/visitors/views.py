@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.views import LoginView
 from django.views.generic.edit import CreateView
+from datetime import datetime
 from django.urls import reverse
 from django.urls import reverse_lazy
 from .forms import *
@@ -17,15 +18,94 @@ def rooms_page(request):
 def booking_room_view(request):
     return render(request, 'room.html')
 
-
 def category_view(request, category_id):
     category = Category.objects.get(id=category_id)
     context = {'category': category}
     return render(request, 'category_details.html', context)# fix the names
 
-def vacancies_view(request, available_rooms):
-    context = {'available_rooms': available_rooms}
-    return render(request, 'vacancies.html', context)
+def check_availability(request):
+
+    if request.method == 'POST':
+        form = CheckAvailabilityForm(request.POST)
+        if form.is_valid():
+            check_in_date = form.cleaned_data['check_in_date']
+            check_out_date = form.cleaned_data['check_out_date']
+            num_guests = form.cleaned_data['num_guests']
+
+            # Call the get_vacancies function and store the returned values in variables
+            available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
+            context = {
+                'available_rooms': available_rooms,
+                'check_in_date': check_in_date,
+                'check_out_date': check_out_date,
+                'num_guests': num_guests
+                }
+            
+            return render(request, 'vacancies.html', context)
+
+    form = CheckAvailabilityForm()   
+    context = {'form': form}
+    return render(request, 'booking.html', context)
+
+
+def get_vacancies(check_in_date, check_out_date, num_guests):
+    """
+    Get a list of available room options for the given date range and number of guests (one option per room category).
+    """
+    conflicting_bookings = Booking.objects.filter(
+        Q(check_in_date__lt=check_out_date) & Q(check_out_date__gt=check_in_date)
+    )
+    booked_rooms = [booking.room for booking in conflicting_bookings]
+    room_types = Category.objects.filter(capacity__gte=num_guests)
+    available_rooms = [room.category for room in Room.objects.all() if room.category in room_types and room not in booked_rooms]
+
+    return available_rooms
+
+
+def reservation(request):
+    room_category = request.GET.get('room')
+    category = get_object_or_404(Category, name=room_category)
+    room = category
+    check_in_date_str = request.GET.get('check_in_date')
+    check_out_date_str = request.GET.get('check_out_date')
+    num_guests = request.GET.get('num_guests')
+    user = request.user
+
+    if request.method == 'POST':
+        guest_details_form = GuestDetailsForm(request.POST, user=user)
+        if guest_details_form.is_valid():
+            guest_details = guest_details_form.save(commit=False)
+            guest_details.user = user
+            guest_details.save()
+            room = get_object_or_404(Room, category=room)
+
+            # Create a booking object
+            booking = Booking.objects.create(
+                user=user,
+                room=room,
+                check_in_date = datetime.strptime(check_in_date_str, '%B %d, %Y').strftime('%Y-%m-%d'),
+                check_out_date = datetime.strptime(check_out_date_str, '%B %d, %Y').strftime('%Y-%m-%d'),
+                num_guests=num_guests,
+                guest_details=guest_details
+            )
+
+            # Perform additional actions if needed
+
+            return redirect('visitors:homepage')
+    else:
+        guest_details_form = GuestDetailsForm(user=user)
+
+    context = {
+        'room': room,
+        'check_in_date': check_in_date_str,
+        'check_out_date': check_out_date_str,
+        'num_guests': num_guests,
+        'user_name': user.first_name,
+        'form': guest_details_form
+    }
+
+    return render(request, 'reservation.html', context)
+
 
 class SignupView(CreateView):
     form_class = SignupForm
@@ -57,39 +137,6 @@ def profile_view(request, user_id):
 def logout_view(request):
     logout(request)
     return redirect('visitors:homepage')
-
-
-def booking_page(request):
-    form = CheckAvailabilityForm()
-
-    if request.method == 'POST':
-        form = CheckAvailabilityForm(request.POST)
-        if form.is_valid():
-            check_in_date = form.cleaned_data['check_in_date']
-            check_out_date = form.cleaned_data['check_out_date']
-            num_guests = form.cleaned_data['num_guests']
-
-            # Call the get_vacancies function and store the returned values in variables
-            available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
-            return render(request, 'vacancies.html', {'available_rooms': available_rooms})
-        
-    context = {'form': form}
-    return render(request, 'booking.html', context)
-
-
-def get_vacancies(check_in_date, check_out_date, num_guests):
-    """
-    Get a list of available room options for the given date range and number of guests (one option per room category).
-    """
-    conflicting_bookings = Booking.objects.filter(
-        Q(check_in_date__lt=check_out_date) & Q(check_out_date__gt=check_in_date)
-    )
-    booked_rooms = [booking.room for booking in conflicting_bookings]
-    room_types = Category.objects.filter(capacity__gte=num_guests)
-    available_rooms = [room.category for room in Room.objects.all() if room.category in room_types and room not in booked_rooms]
-
-    return available_rooms
-
 
 
 # def check_availability(request): # function handles the request to check the availability of a specific room

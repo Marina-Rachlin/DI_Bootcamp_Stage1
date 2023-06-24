@@ -1,6 +1,6 @@
 // Function to generate a random number between min and max (inclusive)
 function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;// we can do it like this : Math.floor(Math.random() * 11)
+    return Math.round(Math.random() * (max - min + 1)) + min;// we can do it like this : Math.floor(Math.random() * 11)
   }
 
   // Function to validate the number input
