@@ -8,34 +8,76 @@
     <p> Check-in date: {{check_in_date}}</p>
     <p> Check-out  date: {{check_out_date}}</p>
     <p> Num of guests: {{num_guests}}</p>
-    {% if available_rooms %}
-        <ul>
-            {% for room in available_rooms %}
-                <li>
-                    {{ room.name }}
-                    <button onclick="redirectToRoom()">View Details</button>
-                    <button onclick="bookNow('{{ room.name}}')">Book Now</button>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No available room options at the moment.</p>
-    {% endif %}
+    
+    <div>
+        <h3>Select a room:</h3>
+        <div>
+            <h4>Sort By:</h4>
+            <select id="sortDropdown" onchange="sortRooms()">
+                <option value="">-- Select --</option>
+                <option value="lowest_price">Lowest Price</option>
+                <option value="highest_price">Highest Price</option>
+            </select>
+        </div>
+
+        {% if available_rooms %}
+            <ul id="vacanciesList">
+                {% for room in available_rooms %}
+                    <li data-price="{{ room.price_per_night }}">
+                        {{ room.name }}
+                        <button onclick="redirectToRoom()">View Details</button>
+                        <button onclick="bookNow('{{ room.name}}')">Book Now</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No available room options at the moment.</p>
+        {% endif %}
+    </div>
 
     <script>
         function redirectToRoom() {
             window.location.href = '../rooms';
         }
-
+    
         function bookNow(roomName) {
             var checkInDate = '{{ check_in_date }}'; 
             var checkOutDate = '{{ check_out_date }}';  
             var numGuests = '{{ num_guests }}';  
-
+    
             var url = '../reservation?room=' + roomName + '&check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&num_guests=' + numGuests;
             window.location.href = url;
         }
+    
+        function sortRooms() {
+            var selectedOption = document.getElementById('sortDropdown').value;
+            var vacanciesList = document.getElementById('vacanciesList');
+            var vacancies = Array.from(vacanciesList.children);
+    
+            if (selectedOption === 'lowest_price') {
+                vacancies.sort(function(a, b) {
+                    var aPrice = parseInt(a.getAttribute('data-price'));
+                    var bPrice = parseInt(b.getAttribute('data-price'));
+                    return aPrice - bPrice;
+                });
+            } else if (selectedOption === 'highest_price') {
+                vacancies.sort(function(a, b) {
+                    var aPrice = parseInt(a.getAttribute('data-price'));
+                    var bPrice = parseInt(b.getAttribute('data-price'));
+                    return bPrice - aPrice;
+                });
+            }
+    
+            vacancies.forEach(function(vacancy) {
+                vacanciesList.removeChild(vacancy);
+            });
+    
+            vacancies.forEach(function(vacancy) {
+                vacanciesList.appendChild(vacancy);
+            });
+        }
     </script>
+    
 </body>
 </html>
 

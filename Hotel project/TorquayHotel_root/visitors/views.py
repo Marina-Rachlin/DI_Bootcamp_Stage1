@@ -34,6 +34,7 @@ def check_availability(request):
 
             # Call the get_vacancies function and store the returned values in variables
             available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
+
             context = {
                 'available_rooms': available_rooms,
                 'check_in_date': check_in_date,
@@ -77,6 +78,7 @@ def reservation(request):
             guest_details = guest_details_form.save(commit=False)
             guest_details.user = user
             guest_details.save()
+
             # retrieve the first available room of chosen category
             room = Room.objects.filter(category=category).first()
 
