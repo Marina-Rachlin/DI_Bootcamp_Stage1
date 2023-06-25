@@ -84,6 +84,8 @@ class Booking(models.Model):
 class Child(models.Model):
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
     age = models.PositiveIntegerField()  
+
+    
     
     # @staticmethod #TODO: work on this
     # def check_availability(request, category_id):

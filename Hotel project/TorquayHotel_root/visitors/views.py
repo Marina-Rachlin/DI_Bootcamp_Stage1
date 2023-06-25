@@ -96,6 +96,7 @@ def reservation(request):
     check_out_date_str = request.GET.get('check_out_date')
     num_adults = request.GET.get('num_adults')
     num_kids = request.GET.get('num_kids')
+    kid_ages = request.GET.get('kid_ages')
     user = request.user
 
     if request.method == 'POST':
@@ -131,6 +132,7 @@ def reservation(request):
         'check_out_date': check_out_date_str,
         'num_adults': num_adults,
         'num_kids': num_kids,
+        'kid_ages': kid_ages,
         'user_name': user.first_name,
         'form': guest_details_form
     }

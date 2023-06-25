@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Multiple Event Listeners</title>
+    <style>
+        #element {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            color: white;
+            text-align: center;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="element">Click Me!</div>
+
+    <script>
+        var element = document.getElementById('element');
+
+        element.addEventListener('click', function () {
+            element.style.backgroundColor = 'yellow';
+            element.style.color = 'black';
+        });
+
+        element.addEventListener('mouseover', function () {
+            element.style.transform = 'translateX(50px)';
+        });
+
+        element.addEventListener('mouseout', function () {
+            element.style.transform = 'translateX(0)';
+        });
+
+        element.addEventListener('dblclick', function () {
+            element.style.fontSize = '3rem';
+        });
+    </script>
+</body>
+</html>
