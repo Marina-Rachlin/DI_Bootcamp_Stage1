@@ -30,17 +30,26 @@ def check_availability(request):
         if form.is_valid():
             check_in_date = form.cleaned_data['check_in_date']
             check_out_date = form.cleaned_data['check_out_date']
-            num_guests = form.cleaned_data['num_guests']
+            num_adults = form.cleaned_data['num_adults']
+            num_kids = form.cleaned_data['num_kids']
+            kid_ages = [request.POST.get('child_age_{}'.format(i + 1)) for i in range(num_kids)]
+            kid_ages = [int(age) if age is not None else 0 for age in kid_ages]
 
             # Call the get_vacancies function and store the returned values in variables
-            available_rooms = get_vacancies(check_in_date, check_out_date, num_guests)
+            available_rooms = get_vacancies(check_in_date, check_out_date, num_adults, num_kids, kid_ages)
+
+            kids_range = range(num_kids)  # Generate the range of numbers for kids' ages, because the range() function in Django templates doesn't accept dynamic variables like num_kids ( and i need to use in the template). 
 
             context = {
                 'available_rooms': available_rooms,
                 'check_in_date': check_in_date,
                 'check_out_date': check_out_date,
-                'num_guests': num_guests
-                }
+                'num_adults': num_adults,
+                'num_kids': num_kids, 
+                'kids_range': kids_range,
+                'kid_ages': kid_ages, 
+            }
+
             
             return render(request, 'vacancies.html', context)
 
@@ -49,7 +58,7 @@ def check_availability(request):
     return render(request, 'booking.html', context)
 
 
-def get_vacancies(check_in_date, check_out_date, num_guests):
+def get_vacancies(check_in_date, check_out_date, num_adults, num_kids, kid_ages):
     """
     Get a list of available room options for the given date range and number of guests (one option per room category).
     """
@@ -57,7 +66,23 @@ def get_vacancies(check_in_date, check_out_date, num_guests):
         Q(check_in_date__lt=check_out_date) & Q(check_out_date__gt=check_in_date)
     )
     booked_rooms = [booking.room for booking in conflicting_bookings]
-    room_types = Category.objects.filter(capacity__gte=num_guests)
+
+    #Retrieve a list of room categories that are suitable for the specified number of guests.
+    if num_kids == 1 and kid_ages[0] > 2:
+        room_types = Category.objects.filter(
+            Q(capacity__gte=num_adults + num_kids) |
+            (Q(roomamenities__name='sofa bed') &
+            Q(roomamenities__categories__capacity=num_adults + num_kids - 1))
+        ).distinct()
+    elif num_kids == 1 and kid_ages[0] <= 2:
+        room_types = Category.objects.filter(
+            (Q(capacity__gte=num_adults + num_kids)| Q(capacity__gte=num_adults))
+        ).distinct() 
+    else:
+        room_types = Category.objects.filter(capacity__gte=num_adults + num_kids)
+
+   # creating the result list of available rooms (categories)
+
     available_rooms = [room.category for room in Room.objects.all() if room.category in room_types and room not in booked_rooms]
 
     return available_rooms
@@ -69,7 +94,8 @@ def reservation(request):
     room = category
     check_in_date_str = request.GET.get('check_in_date')
     check_out_date_str = request.GET.get('check_out_date')
-    num_guests = request.GET.get('num_guests')
+    num_adults = request.GET.get('num_adults')
+    num_kids = request.GET.get('num_kids')
     user = request.user
 
     if request.method == 'POST':
@@ -88,7 +114,8 @@ def reservation(request):
                 room=room,
                 check_in_date = datetime.strptime(check_in_date_str, '%B %d, %Y').strftime('%Y-%m-%d'),
                 check_out_date = datetime.strptime(check_out_date_str, '%B %d, %Y').strftime('%Y-%m-%d'),
-                num_guests=num_guests,
+                num_adults=num_adults,
+                num_kids=num_kids,
                 guest_details=guest_details
             )
 
@@ -102,7 +129,8 @@ def reservation(request):
         'room': room,
         'check_in_date': check_in_date_str,
         'check_out_date': check_out_date_str,
-        'num_guests': num_guests,
+        'num_adults': num_adults,
+        'num_kids': num_kids,
         'user_name': user.first_name,
         'form': guest_details_form
     }

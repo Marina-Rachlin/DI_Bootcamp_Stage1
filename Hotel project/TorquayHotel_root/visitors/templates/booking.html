@@ -15,16 +15,6 @@
     <div class="booking-line">
         <form method="POST">
             {% csrf_token %}
-            <div class="form-field">
-                <label for="guests">No. of guests:</label>
-                <select id="guests" name="num_guests" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>            
 
             <div class="form-field">
                 <label for="startDate">From:</label>
@@ -35,11 +25,70 @@
                 <label for="endDate">To:</label>
                 <input type="date" id="endDate" name="check_out_date" required>
             </div>
+            
+            <div class="form-field">
+                <label for="numAdults">No. of adults:</label>
+                <select id="numAdults" name="num_adults" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
 
+            <div class="form-field">
+                <label for="numKids">No. of kids:</label>
+                <select id="numKids" name="num_kids">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            
+            <ul id="kidAgesList" class="form-field" ></ul>
+            
             <button type="submit">Check Availability</button>
         </form>
-    </div>
 
-    <script src="https://kit.fontawesome.com/c7bb54256c.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/c7bb54256c.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var numKidsSelect = document.getElementById('numKids');
+                var kidAgesList = document.getElementById('kidAgesList');
+        
+                numKidsSelect.addEventListener('change', function() {
+                    var numKids = parseInt(numKidsSelect.value);
+                    kidAgesList.innerHTML = '';
+        
+                    for (var i = 0; i < numKids; i++) {
+                        var li = document.createElement('li');
+                        var label = document.createElement('label');
+                        label.htmlFor = 'childAge_' + (i + 1);
+                        label.textContent = 'Child ' + (i + 1) + ' Age:';
+                        li.appendChild(label);
+        
+                        var select = document.createElement('select');
+                        select.id = 'childAge_' + (i + 1);
+                        select.name = 'child_age_' + (i + 1);
+                        select.required = true;
+                        li.appendChild(select);
+        
+                        for (var age = 0; age <= 12; age++) {
+                            var option = document.createElement('option');
+                            option.value = age;
+                            option.textContent = age;
+                            select.appendChild(option);
+                        }
+        
+                        kidAgesList.appendChild(li);
+                    }
+                });
+            });
+        </script>
+    </div>
 </body>
 </html>

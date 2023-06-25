@@ -66,7 +66,8 @@ class Booking(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
-    num_guests = models.PositiveIntegerField()
+    num_adults = models.PositiveIntegerField()
+    num_kids = models.PositiveIntegerField(default=0)
     payment_status = models.CharField(max_length=20, default='Pending', choices=[('Paid', 'Paid'), ('Pending', 'Pending')])
     created_at = models.DateTimeField(auto_now_add=True)
     guest_details = models.OneToOneField(GuestDetails, on_delete=models.CASCADE, default=None)
@@ -77,7 +78,12 @@ class Booking(models.Model):
 
     def get_total_price(self):
         num_nights = (self.check_out_date - self.check_in_date).days
-        return self.room.category.price_per_night * num_nights    
+        return self.room.category.price_per_night * num_nights  
+    
+
+class Child(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    age = models.PositiveIntegerField()  
     
     # @staticmethod #TODO: work on this
     # def check_availability(request, category_id):

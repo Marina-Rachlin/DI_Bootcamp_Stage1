@@ -5,10 +5,12 @@
 </head>
 <body>
     <h1>Available Room Options</h1>
-    <p> Check-in date: {{check_in_date}}</p>
-    <p> Check-out  date: {{check_out_date}}</p>
-    <p> Num of guests: {{num_guests}}</p>
-    
+    <p>Check-in date: {{ check_in_date }}</p>
+    <p>Check-out date: {{ check_out_date }}</p>
+    <p>Num of adults: {{ num_adults }}</p>
+    <p>Num of kids: {{ num_kids }}</p>
+    <p>Ages of kids: {{num_kids}}</p>
+
     <div>
         <h3>Select a room:</h3>
         <div>
@@ -17,67 +19,96 @@
                 <option value="">-- Select --</option>
                 <option value="lowest_price">Lowest Price</option>
                 <option value="highest_price">Highest Price</option>
+                <option value="recommended">Recommended</option>
             </select>
         </div>
 
         {% if available_rooms %}
-            <ul id="vacanciesList">
-                {% for room in available_rooms %}
-                    <li data-price="{{ room.price_per_night }}">
-                        {{ room.name }}
-                        <button onclick="redirectToRoom()">View Details</button>
-                        <button onclick="bookNow('{{ room.name}}')">Book Now</button>
-                    </li>
-                {% endfor %}
-            </ul>
+        <ul id="vacanciesList">
+            {% for room in available_rooms %}
+                <li data-price="{{ room.price_per_night }}" data-capacity="{{ room.capacity }}" data-category="{{ room.category }}">
+                    {{ room.name }}
+                    <button onclick="redirectToRoom()">View Details</button>
+                    <button onclick="bookNow('{{ room.name }}')">Book Now</button>
+                </li>
+            {% endfor %}
+        </ul>
         {% else %}
             <p>No available room options at the moment.</p>
         {% endif %}
     </div>
 
     <script>
+
+        // Retrieve values from Django template context
+        var checkInDate = '{{ check_in_date }}'; 
+        var checkOutDate = '{{ check_out_date }}';  
+        var numAdults = '{{ num_adults }}';
+        var numKids = '{{ num_kids }}'; 
+        var agesOfKids = [];  
+        for (var i = 0; i < numKids; i++) {
+                var kidAge = document.getElementById('kid_age_' + (i + 1)).value;
+                agesOfKids.push(kidAge);
+            }
+
+
         function redirectToRoom() {
             window.location.href = '../rooms';
         }
     
         function bookNow(roomName) {
-            var checkInDate = '{{ check_in_date }}'; 
-            var checkOutDate = '{{ check_out_date }}';  
-            var numGuests = '{{ num_guests }}';  
-    
-            var url = '../reservation?room=' + roomName + '&check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&num_guests=' + numGuests;
+            var url = '../reservation?room=' + roomName + '&check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&num_adults=' + numAdults + '&num_kids='+ numKids;
+
+            // Add ages of kids to URL as query parameters
+            for (var i = 0; i < agesOfKids.length; i++) {
+                url += '&kid_age_' + (i + 1) + '=' + agesOfKids[i];
+            }
+
             window.location.href = url;
         }
-    
+
         function sortRooms() {
             var selectedOption = document.getElementById('sortDropdown').value;
             var vacanciesList = document.getElementById('vacanciesList');
             var vacancies = Array.from(vacanciesList.children);
-    
+
             if (selectedOption === 'lowest_price') {
                 vacancies.sort(function(a, b) {
-                    var aPrice = parseInt(a.getAttribute('data-price'));
-                    var bPrice = parseInt(b.getAttribute('data-price'));
-                    return aPrice - bPrice;
-                });
-            } else if (selectedOption === 'highest_price') {
-                vacancies.sort(function(a, b) {
-                    var aPrice = parseInt(a.getAttribute('data-price'));
-                    var bPrice = parseInt(b.getAttribute('data-price'));
-                    return bPrice - aPrice;
-                });
-            }
-    
-            vacancies.forEach(function(vacancy) {
-                vacanciesList.removeChild(vacancy);
+                var aPrice = parseInt(a.getAttribute('data-price'));
+                var bPrice = parseInt(b.getAttribute('data-price'));
+                return aPrice - bPrice;
             });
-    
-            vacancies.forEach(function(vacancy) {
-                vacanciesList.appendChild(vacancy);
+        } else if (selectedOption === 'highest_price') {
+            vacancies.sort(function(a, b) {
+                var aPrice = parseInt(a.getAttribute('data-price'));
+                var bPrice = parseInt(b.getAttribute('data-price'));
+                return bPrice - aPrice;
             });
+        // } else if (selectedOption === 'recommended') {
+        //     vacancies.sort(function(a, b) {
+        //         var aCapacity = parseInt(a.getAttribute('data-capacity'));
+        //         var bCapacity = parseInt(b.getAttribute('data-capacity'));
+
+        //         if (aCapacity >= (numAdults + numKids) && bCapacity < (numAdults + numKids)) {
+        //             return -1;
+        //         } else if (aCapacity < (numAdults + numKids) && bCapacity >= (numAdults + numKids)) {
+        //             return 1;
+        //         } else {
+        //             // Sort by room capacity as the secondary criteria
+        //             return aCapacity - bCapacity;
+        //         }
+        //     });
         }
+
+        vacancies.forEach(function(vacancy) {
+            vacanciesList.removeChild(vacancy);
+        });
+
+        vacancies.forEach(function(vacancy) {
+            vacanciesList.appendChild(vacancy);
+        });
+    }    
     </script>
-    
 </body>
 </html>
 

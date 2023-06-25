@@ -21,7 +21,16 @@ class LoginForm(forms.ModelForm):
 class CheckAvailabilityForm(forms.Form):
     check_in_date = forms.DateField()
     check_out_date = forms.DateField()
-    num_guests = forms.IntegerField()   
+    num_adults = forms.IntegerField()
+    num_kids = forms.IntegerField()   
+
+    def __init__(self, *args, **kwargs):
+        super(CheckAvailabilityForm, self).__init__(*args, **kwargs)
+        num_kids = self.initial.get('num_kids', 0)
+        for i in range(num_kids):
+            field_name = f'child_age_{i+1}'
+            label = f'Child {i+1} Age'
+            self.fields[field_name] = forms.IntegerField(label=label)
 
 
 class GuestDetailsForm(forms.ModelForm):
@@ -39,27 +48,6 @@ class GuestDetailsForm(forms.ModelForm):
             self.fields['first_name'].initial = user.first_name
             self.fields['last_name'].initial = user.last_name
 
-# class BookingGuestForm(forms.Form):
-#     booking_form = BookingForm()
-#     guest_details_form = GuestDetailsForm()
-
-# class BookingForm(forms.Form):
-#     check_in_date = forms.DateField(label='Check-in Date')
-#     check_out_date = forms.DateField(label='Check-out Date')
-#     num_adults = forms.IntegerField(label='Number of Adults')
-#     num_children = forms.IntegerField(label='Number of Children')
-#     promotional_code = forms.CharField(label='Promotional Code', required=False)
-#     guest_name = forms.CharField(max_length=100)
-#     guest_email = forms.EmailField()
-#     guest_phone = forms.CharField(max_length=20)
-#     special_requests = forms.CharField(widget=forms.Textarea, required=False)
-#     payment_method = forms.ChoiceField(choices=[('credit_card', 'Credit Card'), ('paypal', 'PayPal')])
-
-# class BookingForm(forms.ModelForm):
-#     class Meta:
-#         model = Booking
-#         fields = '__all__'
-        
 
 # class ReviewForm(forms.ModelForm):
 #     class Meta:
