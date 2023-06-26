@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //function makeJuice(size) {
+
+            // if (size !== 'small' && size !== 'medium' && size !== 'large') {
+            //     console.log('Invalid size argument');
+            //     return;
+            // }
+
+            // function addIngredients(ingredient1, ingredient2, ingredient3) {
+            //     const sentence = `The client wants a ${size} juice, containing ${ingredient1}, ${ingredient2}, ${ingredient3}`;
+            //     console.log(sentence);
+            // }
+
+            // addIngredients('apple', 'orange', 'banana');
+            // }
+
+            // makeJuice('medium');
+
+        function makeJuice(size) {
+            const ingredients = [];
+
+            function addIngredients(ingredient1, ingredient2, ingredient3) {
+                ingredients.push(ingredient1, ingredient2, ingredient3);
+            }
+
+            function displayJuice() {
+                const sentence = `The client wants a ${size} juice, containing ${ingredients.join(', ')}`;
+                console.log(sentence); 
+            }
+
+            addIngredients('apple', 'orange', 'banana');
+            addIngredients('strawberry', 'kiwi', 'pineapple');
+            displayJuice();
+        }       
+
+        makeJuice('large');
+    
+        
+
+
+    </script>
+</body>
+</html>

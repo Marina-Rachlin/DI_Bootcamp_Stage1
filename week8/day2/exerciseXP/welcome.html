@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul style="display: flex; list-style: none; gap: 15px; justify-content: end; align-items: center;">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contacts</a></li>
+        </ul>
+    </nav>
+    
+    <script>
+     (function(userName) {
+        const userDiv = document.createElement("div");
+        const userImg = document.createElement("img");
+        userImg.setAttribute("src", "https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg");
+        userImg.setAttribute("alt", "Profile Picture");
+        userImg.setAttribute("style", "width: 30px; height: 30px;");
+        userDiv.innerHTML = `Welcome, ${userName}!`;
+        userDiv.appendChild(userImg);
+        const navbar = document.querySelector("#navbar ul");
+        navbar.insertBefore(userDiv, navbar.firstChild);
+    })("John");
+    </script>
+</body>
+</html>
