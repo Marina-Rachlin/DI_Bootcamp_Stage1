@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+ </head>
+ <body>
+
+    <h1>Mad Libs</h1>
+
+    <form id="libform">
+        <label for="noun">Noun:</label><input type="text" id="noun"><br>
+        <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+        <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+        <label for="verb">Verb:</label><input type="text" id="verb"><br>
+        <label for="place">A place:</label><input type="text" id="place"><br>
+        <button id="lib-button">Lib it!</button>
+        <button id="shuffle-button">Shuffle</button>
+    </form>
+
+    <p>Generated story: 
+    <span id="story"></span>
+    </p>
+
+    <script>
+    const form = document.forms[0];
+    form.addEventListener('submit', getValues);
+
+    const stories = [
+        "This {adjective} {noun} found out that {person} {verb} around the {place}!",
+        "{person} went to {place} and saw a {adjective} {noun} {verb} there!",
+        "Once upon a time, {person} discovered a {noun} in the {place} and it was {adjective}!",
+        "There was a {adjective} {noun} who loved to {verb} with {person} at the {place}.",
+        "In a magical {place}, {person} found a {adjective} {noun} and decided to {verb} with it."
+    ];
+
+    function getValues(event) {
+        event.preventDefault();
+        const objValues = {};
+        const allInputs = event.target.querySelectorAll('input');
+
+        for (let input of allInputs) {
+            if (input.value === '') {
+                alert('Fill the form');
+                return;
+            }
+            objValues[input.id] = input.value;
+        }
+
+        createStory(objValues);
+    }
+
+    function createStory(objValues) {
+        const story = document.querySelector('#story');
+        const randomIndex = Math.floor(Math.random() * stories.length);
+        const selectedStory = stories[randomIndex];
+        let formattedStory = selectedStory;
+
+        for (let inputId in objValues) {
+            const placeholder = `{${inputId}}`;
+            const value = objValues[inputId];
+            formattedStory = formattedStory.replace(new RegExp(placeholder, 'g'), value);
+        }
+
+        story.textContent = formattedStory;
+        }
+
+    </script>
+
+ </body>
+</html>
