@@ -8,44 +8,38 @@
 </head>
 <body>
     <script>
-        //function makeJuice(size) {
 
-            // if (size !== 'small' && size !== 'medium' && size !== 'large') {
-            //     console.log('Invalid size argument');
-            //     return;
-            // }
+        //part1
 
-            // function addIngredients(ingredient1, ingredient2, ingredient3) {
-            //     const sentence = `The client wants a ${size} juice, containing ${ingredient1}, ${ingredient2}, ${ingredient3}`;
-            //     console.log(sentence);
-            // }
+    // const makeJuice = size => {
+    //     if (!['small', 'medium', 'large'].includes(size)) {
+    //         console.log('Invalid size argument');
+    //         return;
+    //     }
 
-            // addIngredients('apple', 'orange', 'banana');
-            // }
+    //     const addIngredients = (...newIngredients) => console.log(`The client wants a ${size} juice, containing ${newIngredients.join(', ')}`);
 
-            // makeJuice('medium');
+    //     addIngredients('apple', 'orange', 'banana');
+    // }
 
-        function makeJuice(size) {
-            const ingredients = [];
+    // makeJuice('medium');
 
-            function addIngredients(ingredient1, ingredient2, ingredient3) {
-                ingredients.push(ingredient1, ingredient2, ingredient3);
-            }
 
-            function displayJuice() {
-                const sentence = `The client wants a ${size} juice, containing ${ingredients.join(', ')}`;
-                console.log(sentence); 
-            }
+    //part2
 
-            addIngredients('apple', 'orange', 'banana');
-            addIngredients('strawberry', 'kiwi', 'pineapple');
-            displayJuice();
-        }       
+    function makeJuice(size) {
+        const ingredients = [];
 
-        makeJuice('large');
-    
-        
+        const addIngredients = (...newIngredients) => ingredients.push(...newIngredients);//used the rest parameter
 
+        const displayJuice = () => console.log(`The client wants a ${size} juice, containing ${ingredients.join(', ')}`);
+
+        addIngredients('apple', 'orange', 'banana');
+        addIngredients('strawberry', 'kiwi', 'pineapple');
+        displayJuice();
+    }   
+
+    makeJuice('large');
 
     </script>
 </body>

@@ -10,10 +10,10 @@
     
 
     <script>
-    (function(numberOfChildren, partnerName, geographicLocation, jobTitle) {
-        const sentence = `You will be a ${jobTitle} in ${geographicLocation}, and married to ${partnerName} with ${numberOfChildren} kids.`;
-        document.body.textContent = sentence;
-    })(2, "John", "Tel Aviv", "programmer");
+        
+    ((numberOfChildren, partnerName, geographicLocation, jobTitle) =>
+    document.body.textContent = `You will be a ${jobTitle} in ${geographicLocation}, and married to ${partnerName} with ${numberOfChildren} kids.`
+    )(2, "John", "Tel Aviv", "programmer");
 
     </script>
 </body>

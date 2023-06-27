@@ -165,10 +165,8 @@ console.log(experiencePoints);
 // console.log(isString([1, 2, 4, 0]));
 // //false
 
-const isString = (value) => {
-    return typeof value === 'string';
-  };
-  
+const isString = value => typeof value === 'string';
+
 
 // 🌟 Exercise 4 : Find The Sum
 // Instructions
@@ -190,13 +188,11 @@ const sum = (num1, num2) => num1 + num2;
 function convertToGramsFromKg(weightInKg) {
     return weightInKg * 1000;
   }
-  
-  
+
 //function expression
 const convertToGramsFromKg = function(weightInKg) {
     return weightInKg * 1000;
   };
-  
   
 //Difference between function declaration and function expression:
 //Function declaration: The function is declared using the function keyword. It can be invoked before its declaration in the code.
@@ -204,11 +200,4 @@ const convertToGramsFromKg = function(weightInKg) {
   
 //arrow_function:
 const convertToGramsFromKg = weightInKg => weightInKg * 1000;
-
-
-// 🌟 Exercise 6 : Fortune Teller
-// Instructions
-// Create a self invoking function that takes 4 arguments: number of children, partner’s name, geographic location, job title.
-// The function should display in the DOM a sentence like "You will be a <job title> in <geographic location>, and married to <partner's name> with <number of children> kids."
-
 
