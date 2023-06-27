@@ -10,12 +10,9 @@ const groceries = {
   }
 };
 
-const displayGroceries = () => {
-  groceries.fruits.forEach(fruit => {
-    console.log(fruit);
-  });
-};
+const displayGroceries = () => groceries.fruits.forEach(fruit => console.log(fruit));
 displayGroceries ()
+
 
 const cloneGroceries = () => {
   let user = client; //changing the value of the client variable doesn't affect the user variable because user is a separate copy of the initial value of client
@@ -31,4 +28,5 @@ const cloneGroceries = () => {
 };
 
 cloneGroceries();
+
 
