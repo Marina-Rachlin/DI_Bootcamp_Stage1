@@ -1,0 +1,61 @@
+@import url('https://fonts.cdnfonts.com/css/sega-logo-font');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #6556cd;
+    background-image: url(images/circuit-pattern.png);
+}
+
+.navbar{
+    background-color: #6ade82;
+    gap:30px;
+    padding-left: 3%;
+}
+
+.navbar-brand{
+    font-family: 'SEGA LOGO FONT', sans-serif;                                
+}
+
+.form-control{
+    background-color: #c8d6e5;
+}
+
+.card{
+    background-color: #4ec1c4;
+    background-image: url(images/card-pattern.png);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.card-img-top{
+    border-radius: 50%;
+    background-color: #303952;
+}
+
+.card-title{
+    text-align: center;
+    color: #303952;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+p{
+    color: #303952;
+    text-align: center;
+}
+
+#content{
+    margin: 3% 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+
+
+
