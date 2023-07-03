@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="GET" onsubmit="handleSubmit(event)">
+        <input type = "text" name = "first_name" value = "">
+        <input type = "text" name = "last_name" value = "">
+        <button>Send</button>
+    </form>
+
+    <script>
+        function handleSubmit(event){
+            event.preventDefault();
+            let form = document.forms[0];
+            let full_name = {
+                "name": form.first_name.value,
+                "lastname": form.last_name.value
+            }
+            let jsonData = JSON.stringify(full_name);
+            var output = document.createElement('span');
+            output.textContent = jsonData;
+            document.getElementsByTagName('body')[0].appendChild(output);
+        }
+    </script>
+</body>
+</html>
