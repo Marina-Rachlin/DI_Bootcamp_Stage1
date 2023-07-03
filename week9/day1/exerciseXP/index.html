@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input, textarea{
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+     <!-- 🌟 Exercise 1 : HTML Form -->
+    <form action="index.html" method="GET">
+        <label for = "name">Name</label>
+        <input type = "text" name = "name" value = "">
+        <label for = "comments">Comments</label>
+        <textarea rows="4" name="comments"></textarea>
+        <input type="submit" name="submit" value="Send">
+    </form>
+     <!--the sent data will appear in the url  -->
+
+    <!-- 🌟 Exercise 2 : HTML Form #2
+    Instructions
+    Use the same form structure as Exercise 1.
+    When you click the Send button, the form will be submitted with a POST method.(you can use the same HTML file for the action url)
+    Where will the sent data appear? Hint : Look at the Network Tab -->
+
+    <form action="index.html" method="POST">
+        <label for = "name">Name</label>
+        <input type = "text" name = "name" value = "">
+        <label for = "comments">Comments</label>
+        <textarea rows="4" name="comments"></textarea>
+        <input type="submit" name="submit" value="Send">
+    </form>
+
+    <!--the sent data will appear in the body of request -->
+
+    <script src="script.js"></script>
+</body>
+</html>
