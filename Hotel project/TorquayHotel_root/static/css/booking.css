@@ -44,6 +44,10 @@
     display: block;
   }
   
+.booking-intro{
+    display: flex;
+  }
+  
 @media screen and (max-width: 768px) {
     .booking-line {
       flex-direction: column;

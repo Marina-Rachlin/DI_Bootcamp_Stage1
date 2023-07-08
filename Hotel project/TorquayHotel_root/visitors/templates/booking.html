@@ -16,6 +16,24 @@
         <form method="POST">
             {% csrf_token %}
 
+            <h1> BOOK NOW</h1>
+            <div class="booking-intro">
+                <div class="column">
+                    <h2>WHY BOOK DIRECT:</h2>
+                    <p>- exclusive in-room welcome amenities<br>
+                        - upsells with discounts & best rate guarantee<br>
+                        - more Flexibility in the booking process<br>
+                        - more personalized Guest Experience<br>
+                    </p>
+                    <div class="column">
+                        <h2>IMPORTANT NOTE:</h2>
+                        <p>- adults-only Hotel, children are welcome from 12 years and above<br>
+                            - pets are not allowed<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-field">
                 <label for="startDate">From:</label>
                 <input type="date" id="startDate" name="check_in_date" required>
