@@ -1,0 +1,44 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Shop</h1>
+    <% for(const item in data) { %>
+        <%=  data[item].name  %>
+      <% } %>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .item-container {
+        display: inline-block;
+        margin:20px;
+        padding:20px;
+        border:1px solid #ccc;
+      }
+    </style>
+</head>
+<body>
+    <h1>Shop</h1>
+    <% for(const item in locals.data) { %>
+        <div class="item-container">
+          <%=  data[item].name  %><br><br>
+          <%= data[item].price %>
+        </div>
+    <% } %>
+</body>
+</html>
+
+
+
