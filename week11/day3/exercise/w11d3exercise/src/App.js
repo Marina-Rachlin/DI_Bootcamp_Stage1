@@ -3,19 +3,14 @@ import React, { Component } from "react";
 import "./App.css";
 
 class BuggyCounter extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       counter: 0,
     };
   }
 
-  handleClick = () => {
-    this.setState((previous) => {
-      //console.log(previous.counter);
-      return { counter: previous.counter + 1 };
-    });
-  };
+  add = () => this.setState({counter: this.state.counter +1});
 
   render() {
     if (this.state.counter >= 5) {
@@ -24,7 +19,7 @@ class BuggyCounter extends Component {
 
     return (
       <>
-        <h1 onClick={this.handleClick}>{this.state.counter}</h1>
+        <h1 onClick={this.add}>{this.state.counter}</h1>
       </>
     );
   }
