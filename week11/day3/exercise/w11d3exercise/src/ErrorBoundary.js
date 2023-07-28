@@ -1,27 +1,23 @@
 import React from "react";
 
 class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      err: null,
-      errInfo: null
+      hasErr: false
     };
   }
 
   componentDidCatch(err, errInfo) {
-    
-    this.setState({ 
-        err: err,
-        errInfo: errInfo 
-    });
+    this.setState({ hasErr:true, err: err, errInfo: errInfo });
+    //write err and errInfo to a log file and send to a support team
   }
 
   render() {
-    if (this.state.err) {
+    if (this.state.hasErr) {
         return (
         <>
-            <h1>Something went wrong.</h1>
+           Something went wrong, we are fixing the problem
             <details style={{ whiteSpace: 'pre-wrap' }}>
                 {this.state.err && this.state.err.toString()};
                 <br />
