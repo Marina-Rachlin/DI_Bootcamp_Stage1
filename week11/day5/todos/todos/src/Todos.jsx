@@ -3,7 +3,7 @@ import React from 'react';
 const Todos = ({todos, deleteTodo}) => {
 
   //get from localstorage
-  //todos = JSON.parse(localStorage.getItem('todos'));
+  todos = JSON.parse(localStorage.getItem('todos'));
 
   const todoList = todos.length ? (
     todos.map(todo => {

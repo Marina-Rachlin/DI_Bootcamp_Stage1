@@ -9,14 +9,12 @@ class App extends Component {
   }
 
    componentDidMount() {
-    
-    //localStorage.getItem('todos');
+    localStorage.getItem('todos');
    }
 
   deleteTodo = (id) => {
     const todos = this.state.todos.filter(todo =>  todo.id !== id);
-
-    //localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
 
     this.setState({
       todos
@@ -30,8 +28,7 @@ class App extends Component {
       todos
     });
 
-
-     //localStorage.setItem('todos', JSON.stringify(todos));
+     localStorage.setItem('todos', JSON.stringify(todos));
 
   }
   
